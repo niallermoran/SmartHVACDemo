@@ -1,0 +1,24 @@
+﻿body {
+ 
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+   
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+   
+}
+
+#page-wrapper
+{
+    margin-left:0px;
+}
+
+.spacer{
+    margin:5px;
+}

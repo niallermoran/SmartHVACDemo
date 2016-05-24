@@ -1,0 +1,14 @@
+﻿{
+  "$schema": "http://json-schema.org/schemas/2014-11-01/apiapp.json#",
+  "id": "SmartHVACWebAPI",
+  "namespace": "Demos.IoT.Web",
+  "gateway": "2015-01-14",
+  "version": "1.0.0",
+  "title": "SmartHVACWebAPI",
+  "summary": "",
+  "author": "Niall Moran",
+  "endpoints": {
+    "apiDefinition": "/swagger/docs/v1",
+    "status": null
+  }
+}

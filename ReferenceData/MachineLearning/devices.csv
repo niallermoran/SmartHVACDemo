@@ -1,0 +1,5 @@
+JSON.DeviceId,JSON.DeviceName,JSON.FloorArea,JSON.DeviceLocation,JSON.AverageThermostatValue,JSON.Latitude,JSON.Longitude
+00255c2000,Factory 1,10000,Ireland,20,-7.377517,53.125912
+00255c2001,Factory 2,15000,US East Coast,21,-78.40017,35.339195
+00255c2002,Factory 3,20000,Italy,22,15.696828,40.451631
+00255c2003,Factory 4,25000,Norway,23,10.661576,59.890702

@@ -1,0 +1,47 @@
+[
+  {
+    "DeviceId": "00255c2000",
+    "DeviceLocation": "Ireland",
+    "DeviceName": "Factory 1",
+    "FloorArea": "10000",
+    "Latitude": -7.377517,
+    "Longitude": 53.125912,
+"Generate": true
+  },
+  {
+    "DeviceId": "00255c2001",
+    "DeviceLocation": "US East Coast",
+    "DeviceName": "Factory 2",
+    "FloorArea": "15000",
+    "Latitude": -78.400170,
+    "Longitude": 35.339195,
+"Generate": true
+  },
+  {
+    "DeviceId": "00255c2002",
+    "DeviceName": "Factory 3",
+    "FloorArea": "20000",
+    "DeviceLocation": "Italy",
+    "Latitude": 15.696828,
+    "Longitude": 40.451631,
+"Generate":true
+  },
+  {
+    "DeviceId": "00255c2003",
+    "DeviceName": "Factory 4",
+    "FloorArea": "25000",
+    "DeviceLocation": "Norway",
+    "Latitude": 10.661576,
+    "Longitude": 59.890702,
+"Generate": true
+  },
+ {
+    "DeviceId": "00255c2004",
+    "DeviceName": "Factory 5",
+    "FloorArea": "30000",
+    "DeviceLocation": "UK",
+    "Latitude": 0.110770,
+    "Longitude": 53.559598,
+"Generate":false
+  }
+]

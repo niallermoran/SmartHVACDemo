@@ -1,0 +1,29 @@
+{
+  "siteName": {
+    "value": "SmartHVACWebDashboard"
+  },
+  "hostingPlanName": {
+    "value": "SmartHVACApps"
+  },
+  "siteLocation": {
+    "value": "North Europe"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "siteMode": {
+    "value": "Limited"
+  },
+  "computeMode": {
+    "value": "0"
+  },
+  "subscriptionId": {
+    "value": "94b3e42f-ba9b-4597-963b-d2fea15e9ba3"
+  },
+  "resourceGroup": {
+    "value": "SmartHVACDemo"
+  }
+}
