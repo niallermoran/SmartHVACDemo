@@ -11,7 +11,7 @@
     {
         // get the latest figures for all devices
         $.ajax({
-            url: "/api/Gateway?count=50",
+            url: "/api/TemperatureReadings?count=50",
             type: "GET",
             dataType: "json",
             success: onDataReceived
@@ -38,7 +38,7 @@
                 var rollingseries = [];
                 var ticks = [];
                 var colors = ["Green", "Blue", "Black", "Yellow", "Purple"];
-
+                
                 for (var i = 0; i < data.length; i++) {
                     try {
 
@@ -49,11 +49,12 @@
                         var deviceTempData = data[i].TemperatureReadings;
 
                         // set up max 10 ticks
-                        if (i == 0) {
+                        var indexCount = (deviceTempData.length < 10 ? deviceTempData.length : 10);
+                        var indexDelta = Math.floor(deviceTempData.length / indexCount);
+                
+                        if ( ticks.length == 0 && indexCount > 0) {
                             ticks = [];
-                            var indexCount = (deviceTempData.length < 10 ? deviceTempData.length : 10);
-                            var indexDelta = Math.floor(deviceTempData.length / indexCount);
-                            for (var bar = 1; bar <= deviceTempData.length - 1; bar += indexDelta) {
+                              for (var bar = 1; bar <= deviceTempData.length - 1; bar += indexDelta) {
                                 var point = [];
                                 point = [bar, deviceTempData[bar - 1].TimeLabelShort];
                                 ticks.push(point);
@@ -91,7 +92,7 @@
                     },
                     yaxis: {
                         min: 10,
-                        max: 35
+                        max: 45
                     },
                     grid: {
                         minorVerticalLines: true
@@ -141,10 +142,11 @@
                         var deviceTempData = data[i].TemperatureReadings;
 
                         // set up max 10 ticks
-                        if (i == 0) {
+                        var indexCount = (deviceTempData.length < 10 ? deviceTempData.length : 10);
+                        var indexDelta = Math.floor(deviceTempData.length / indexCount);
+
+                        if ( ticks.length == 0 && indexCount > 0) {
                             ticks = [];
-                            var indexCount = (deviceTempData.length < 10 ? deviceTempData.length : 10);
-                            var indexDelta = Math.floor(deviceTempData.length / indexCount);
                             for (var bar = 1; bar <= deviceTempData.length - 1; bar += indexDelta) {
                                 var point = [];
                                 point = [bar, deviceTempData[bar - 1].TimeLabelShort];
@@ -182,8 +184,7 @@
                         labelsAngle: 45
                     },
                     yaxis: {
-                     //   min: 10,
-                     //   max: 35
+                        min: 0
                     },
                     grid: {
                         minorVerticalLines: true

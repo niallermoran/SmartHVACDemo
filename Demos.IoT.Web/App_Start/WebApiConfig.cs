@@ -25,6 +25,12 @@ namespace Demos.IoT.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //config.Routes.MapHttpRoute(
+            //    name: "CountApi",
+            //    routeTemplate: "api/{controller}/{count}",
+            //    defaults: new { count = RouteParameter.Optional }
+            //);
         }
     }
 }

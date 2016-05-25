@@ -70,18 +70,13 @@ namespace Demos.IoT.Webjobs.DataSimulator
 
                         // get the sensor readings for 4 stands
                         double internaltemp = avgInternalTemp + (rand.NextDouble() * 4) - 1; // actual temp values from thermostat, could be anything just under 20 to about 23 
-
-                        // define the number of people within the building
-                        int numberofPeople = (int)Math.Round(rand.NextDouble() * deviceModel.FloorArea / 3 );
-
-                        // calculate an ambient temp we want to achieve based on # people
-                        double ambientTemp = (20.5 - ( numberofPeople / 10000));
+                        double numberofPeople = 40 + (rand.NextDouble() * 4) - 1; // actual temp values from thermostat, could be anything just under 20 to about 23 
 
                         // make this random to simulate somebody just pressing boost
                         int isHeatingOn = (int)Math.Round( rand.NextDouble() );
 
                         // capture the time that the reading is taken
-                        DateTime time = DateTime.Now;
+                        DateTime time = DateTime.Now.ToUniversalTime();
 
                         // create an object to represent the data
                         TemperatureReading telemetryDataPoint = new TemperatureReading
@@ -92,7 +87,7 @@ namespace Demos.IoT.Webjobs.DataSimulator
                             ExternalTemp = internaltemp - 15,
                             Internaltemp = internaltemp,
                             IsHeatingOn = isHeatingOn,
-                            NumberofPeople = numberofPeople,
+                            NumberofPeople = (int) numberofPeople,
                             Time = time
                         };
 
@@ -107,7 +102,7 @@ namespace Demos.IoT.Webjobs.DataSimulator
                                 await deviceClient.SendEventAsync(message);
                                 DataPointsSent++;
 #if DEBUG
-                                Console.WriteLine("{0} > temp: {1},  is heating on: {2}, # People: {3}", device.Id + " " + time.ToString("HH:mm"), internaltemp.ToString(), isHeatingOn.ToString(),  numberofPeople.ToString());
+                                Console.WriteLine("Sending data to hub {0} > temp: {1},  is heating on: {2}, # People: {3}", device.Id + " " + time.ToString("HH:mm:ss"), internaltemp.ToString(), isHeatingOn.ToString(),  numberofPeople.ToString());
 #endif
                                 return null;
 

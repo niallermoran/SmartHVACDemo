@@ -9,10 +9,6 @@ namespace Demos.IoT
 {
     public class Strings
     {
-        /// Below connection strings and keys are hard coded for simplicity
-        /// please remember to change this for any production system, e.g. Use CloudConfigurationManager
-        /// as per commented settings below
-
         /// <summary>
         /// Iot Hub properties from portal
         /// </summary>
@@ -49,7 +45,7 @@ namespace Demos.IoT
         /// Redis cache connection string
         /// </summary>
         public static string RedisConnectionString = "[]";
-            
+
         ///// <summary>
         ///// Iot Hub properties from portal
         ///// </summary>

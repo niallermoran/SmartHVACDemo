@@ -23,12 +23,12 @@ namespace Demos.IoT.Web.Controllers
             return DeviceFactory.Instance.Devices;
         }
 
-        [SwaggerOperation("GetDevice")]
-        // GET: api/Device/5
-        public DeviceModel Get(string id)
-        {
-            return (from d in DeviceFactory.Instance.Devices where d.DeviceId == id select d).FirstOrDefault();
-        }
+        //[SwaggerOperation("GetDevice")]
+        //// GET: api/Device/5
+        //public DeviceModel Get(string id)
+        //{
+        //    return (from d in DeviceFactory.Instance.Devices where d.DeviceId == id select d).FirstOrDefault();
+        //}
 
     }
 

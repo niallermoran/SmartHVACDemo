@@ -39,6 +39,14 @@ namespace Demos.IoT.Webjobs
                 var redisConnection = ConnectionMultiplexer.Connect(Strings.RedisConnectionString);
                 cache = redisConnection.GetDatabase();
 
+                // clear down cache for demo purposes
+                var devices = DeviceFactory.Instance.Devices;
+                foreach (var device in devices)
+                {
+                    // for device 5 clear down all values
+                    cache.KeyDelete(device.DeviceId);
+                }
+
                 // setup timer to report status every hour
                 TimerCallback callback = ReportStatus;
                 timer = new Timer(callback, null, 1000, 60 * 30 * 1000);
@@ -77,7 +85,7 @@ namespace Demos.IoT.Webjobs
                     await cache.ListLeftPushAsync(model.DeviceId, data);
 
 #if DEBUG
-                    Console.WriteLine("{0} > temp: {1},  is heating on: {2}, # People: {3}", model.DeviceId + " " + model.Time.ToString("HH:mm"), 
+                    Console.WriteLine("Read data from IoT Hub {0} > temp: {1},  is heating on: {2}, # People: {3}", model.DeviceId + " " + model.Time.ToString("HH:mm"), 
                        model.Internaltemp.ToString(), model.IsHeatingOn.ToString(), model.NumberofPeople.ToString());
 #endif
 

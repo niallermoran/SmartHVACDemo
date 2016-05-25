@@ -4,22 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 using Demos.IoT.Models;
-
 using StackExchange.Redis;
-
 using Swashbuckle.Swagger.Annotations;
 using Swashbuckle.Swagger;
 
 namespace Demos.IoT.Web.Controllers
 {
-    public class GatewayController : ApiController
+    public class DeviceCommandController
     {
-        public IEnumerable<DeviceTemperatureReadings> Get( int count )
+        public IEnumerable<TemperatureReading> Get(int count)
         {
-            return WebApiApplication.RedisHelper.GetDevicesTemperatureReadings( count);
+            return WebApiApplication.RedisHelper.GetDeviceCommands(count);
         }
     }
-
 }

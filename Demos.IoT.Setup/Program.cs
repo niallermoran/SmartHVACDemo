@@ -42,28 +42,28 @@ namespace Demos.IoT.Setup
             DeleteTable("WADMetricsPT5MP10DV2S20160515");
         }
 
-
         static void ClearDownRedisCache()
         {
             try
             {
-                // get the redis cache object set up
                 var redisConnection = ConnectionMultiplexer.Connect(Strings.RedisConnectionString);
-                IDatabase cache = redisConnection.GetDatabase();
+                var redisCache = redisConnection.GetDatabase();
 
+                // get the redis cache object set up
                 var devices = DeviceFactory.Instance.Devices;
                 foreach (var device in devices)
                 {
                     // for device 5 clear down all values
-                    cache.KeyDelete(device.DeviceId);
+                    redisCache.KeyDelete(device.DeviceId);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error connecting to redis: " + ex.Message);
             }
         }
+
 
         /// <summary>
         /// Deletes the tables for stream analytics outputs.

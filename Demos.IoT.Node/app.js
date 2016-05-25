@@ -2,7 +2,9 @@
 
 console.log("Starting ..");
 
+// Opensource API for interacting with boards like Arduino
 var Five = require("johnny-five");
+
 var Edison = require("edison-io");
 
 // Iot Hub objects
@@ -16,8 +18,8 @@ var client = Client.fromConnectionString(connectionString, Protocol);
 
 // Define the sensors you will use
 var temp;
-
-var lcd;
+var buzzer;
+var isHeatingOn = 1; // default to on 
 
 // Define the board, which is an abstraction of the Intel Edison
 var board = new Five.Board({
@@ -34,17 +36,20 @@ board.on("ready", function () {
 		controller: "GROVE",
 		pin: "A0",
 		freq: 1000
-    });
+    });                                                 
     
-    //lcd = new Five.LCD({
-    //    controller: 'JHD1313M1',
-    //    backlight: 6,
-    //    rows: 2,
-    //    cols: 20
-    //});
-   
-  //  lcd.print("Board Ready");
+    buzzer = new Five.Piezo(4);
+    MakeSound();
 });
+
+function MakeSound()
+{
+    buzzer.frequency(587, 1000);
+    setTimeout(function () {
+        buzzer.off();  
+    }, 500);
+
+}
 
 
 var connectCallback = function (err) {
@@ -52,10 +57,8 @@ var connectCallback = function (err) {
         console.error('Could not connect: ' + err.message);
     } else {
         console.log('Client connected');
-        
-        
-        var isHeatingOn = 0;
 
+        
         client.on('message', function (msg) {
             
             // get the action sent from the cloud
@@ -64,43 +67,35 @@ var connectCallback = function (err) {
              
             if (action == "TurnOn" && isHeatingOn == 0) {
                 
+                MakeSound();
                 // receives messages sent from the cloud
                 console.log('Message received : ' + action);
-                
-
                 isHeatingOn = 1;
-                //lcd.clear();
-                //lcd.print("Heating On");
-
             }
             
             if (action == "TurnOff" && isHeatingOn == 1) {
                 
+                
+                MakeSound();
                 // receives messages sent from the cloud
                 console.log('Message received : ' + action);
-                
-                
                 isHeatingOn = 0;
-                
-                //lcd.clear();
-                //lcd.print("Heating Off");
-
             }
 
-            client.complete(msg, printResultFor('completed'));
+            client.complete(msg, printResultFor('Cloud to device message received'));
         });
         
         // Create a message and send it to the IoT Hub every second
         var sendInterval = setInterval(function () {
-            
+            var d = new Date();
             var data = JSON.stringify( {
                 DeviceId: '00255c2004',
                 DeviceName : 'Factory 5',
-                FloorArea: '30000',
+                FloorArea: '10000',
                 Internaltemp: temp.celsius,
                 ExternalTemp: temp.celsius - 15,
                 IsHeatingOn: isHeatingOn,
-                NumberofPeople: 75,
+                NumberofPeople: 50,
                 Time: new Date()
             });
 

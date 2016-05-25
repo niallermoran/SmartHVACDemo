@@ -21,6 +21,8 @@ namespace Demos.IoT.Webjobs
     /// </summary>
     public class SmartHVACDeviceEventProcessor : IEventProcessor
     {
+        IDatabase cache = null;
+
         public async Task CloseAsync(PartitionContext context, CloseReason reason)
         {
             Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
@@ -32,6 +34,11 @@ namespace Demos.IoT.Webjobs
 
         public Task OpenAsync(PartitionContext context)
         {
+            // get the redis cache object set up
+            var redisConnection = ConnectionMultiplexer.Connect(Strings.RedisConnectionString);
+            cache = redisConnection.GetDatabase();
+
+
             return Task.FromResult<object>(null);
         }
 
@@ -52,8 +59,12 @@ namespace Demos.IoT.Webjobs
                     Newtonsoft.Json.Linq.JObject json = JObject.Parse(data);
                     string action = json.GetValue("action").ToString();
 
-                    // send this data to the appropriate device
+                    // send this data to the appropriate evice
                     await SendMessageToDevice(model.DeviceId, action);
+
+                    // add data to cache for display on UI
+                    // add this json to the head of a liost for this device
+                    await cache.ListLeftPushAsync( "DeviceCommands", data );
 
                     Console.WriteLine("Processed cloud to device event for Device: " + model.DeviceId + ", Action: " + action);
 

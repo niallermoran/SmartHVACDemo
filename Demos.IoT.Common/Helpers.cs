@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demos.IoT
+namespace System
 {
     public static class Helpers
     {
+        public static int ToInt( this string text )
+        {
+            return int.Parse(text);
+        }
+
         /// <summary>
         /// Supports retrying a block of code a number of times
         /// </summary>

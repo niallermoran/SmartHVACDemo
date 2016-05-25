@@ -1,13 +1,6 @@
 {
   "name": "button-led",
   "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ThingLabsIo/IoTLabs"
-  },
-  "bugs": {
-    "url": "https://github.com/ThingLabsIo/IoTLabs/issues"
-  },
   "description": "Responding to sensor input using Node.js, Johnny-Five, a Grove Button Sensor and LED Module.",
   "main": "app.js",
   "license": "MIT",

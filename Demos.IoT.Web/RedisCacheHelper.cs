@@ -21,6 +21,25 @@ namespace Demos.IoT.Web
             redisCache = redisConnection.GetDatabase();
         }
 
+        public void ClearDownRedisCache()
+        {
+            try
+            {
+                // get the redis cache object set up
+                var devices = DeviceFactory.Instance.Devices;
+                foreach (var device in devices)
+                {
+                    // for device 5 clear down all values
+                    redisCache.KeyDelete(device.DeviceId);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error connecting to redis: " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// Gets the most recent temperature readings for each device.
         /// </summary>
@@ -64,11 +83,11 @@ namespace Demos.IoT.Web
         /// Gets the last temperature reading for all devices
         /// </summary>
         /// <returns></returns>
-        public IEnumerable< TemperatureReading> GetDevicesLastTemperatureReading()
+        public IEnumerable<DeviceTemperatureReadings> GetDevicesLastTemperatureReading()
         {
             try
             {
-                List<TemperatureReading> readings = new List<TemperatureReading>();
+                List<DeviceTemperatureReadings> readings = new List<DeviceTemperatureReadings>();
                 var devices = DeviceFactory.Instance.Devices;
 
                 foreach (var device in devices)
@@ -78,7 +97,11 @@ namespace Demos.IoT.Web
                         // get's the next list item from the head for this device id
                         string json = redisCache.ListRange(device.DeviceId, 0, 1)[0];
                         var reading = Newtonsoft.Json.JsonConvert.DeserializeObject<TemperatureReading>(json);
-                        readings.Add(reading);
+                        DeviceTemperatureReadings deviceReading = new DeviceTemperatureReadings();
+                        deviceReading.Device = device;
+                        deviceReading.TemperatureReadings = new List<TemperatureReading>();
+                        deviceReading.TemperatureReadings.Add(reading);
+                        readings.Add(deviceReading);
                     }
                     catch
                     {
@@ -86,6 +109,36 @@ namespace Demos.IoT.Web
                 }
 
                 return readings;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns device commands
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<TemperatureReading> GetDeviceCommands(int count)
+        {
+            try
+            {
+                List<TemperatureReading> readings = new List<TemperatureReading>();
+                var array = redisCache.ListRange("DeviceCommands", 0, count - 1);
+                List<TemperatureReading> list = new List<TemperatureReading>();
+                foreach (var s in array)
+                {
+                    try
+                    {
+                        var o = JsonConvert.DeserializeObject<TemperatureReading>(s);
+                        list.Add(o);
+                    }
+                    catch { }
+                }
+
+
+                return list;
             }
             catch (Exception ex)
             {

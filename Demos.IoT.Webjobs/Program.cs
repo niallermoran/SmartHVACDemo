@@ -26,7 +26,7 @@ namespace Demos.IoT.Webjobs
             try
             {
                 Functions.SetupEventProcessorIoTHub().Wait();
-              //  Functions.SetupEventProcessorDeviceMessages().Wait();
+                Functions.SetupEventProcessorDeviceMessages().Wait();
 
                 RunAsync().Wait();
             }
