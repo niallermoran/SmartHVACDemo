@@ -9,6 +9,11 @@ namespace Demos.IoT
 {
     public class Strings
     {
+        /// keys and connectionstrings are hard coded below for demo reasons
+        /// as it makes it easier to setup.
+        /// In reality carefully consider where you store these credentials
+        /// e.g. see CloudConfiguration below where values can be stored within the Cloud
+
         /// <summary>
         /// Iot Hub properties from portal
         /// </summary>

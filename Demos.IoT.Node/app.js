@@ -12,6 +12,7 @@ var Protocol = require('azure-iot-device-amqp').Amqp;
 var Client = require('azure-iot-device').Client;
 var Message = require('azure-iot-device').Message;
 
+// need a better way to store this in reality, this is just for demo
 var connectionString = 'HostName=[eventhubname].azure-devices.net;DeviceId=[device id];SharedAccessKeyName=[shared access key];SharedAccessKey=[key]';
 
 var client = Client.fromConnectionString(connectionString, Protocol);
