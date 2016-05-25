@@ -92,6 +92,7 @@
                     },
                     yaxis: {
                         min: 15,
+                        max: 45
                     },
                     grid: {
                         minorVerticalLines: true

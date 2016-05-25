@@ -25,6 +25,10 @@ namespace Demos.IoT.Webjobs
 
             try
             {
+                // clears down the cache once started
+                RedisCacheHelper helper = new RedisCacheHelper();
+                helper.ClearDownRedisCache();
+
                 Functions.SetupEventProcessorIoTHub().Wait();
                 Functions.SetupEventProcessorDeviceMessages().Wait();
 

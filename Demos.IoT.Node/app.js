@@ -83,7 +83,7 @@ var connectCallback = function (err) {
                 isHeatingOn = 0;
             }
 
-            client.complete(msg, printResultFor('Cloud to device message received'));
+            client.complete(msg, printResultFor('Cloud to device message received: ' + action));
         });
         
         // Create a message and send it to the IoT Hub every second

@@ -85,7 +85,7 @@ namespace Demos.IoT.Webjobs
                     await cache.ListLeftPushAsync(model.DeviceId, data);
 
 #if DEBUG
-                    Console.WriteLine("Read data from IoT Hub {0} > temp: {1},  is heating on: {2}, # People: {3}", model.DeviceId + " " + model.Time.ToString("HH:mm"), 
+                    Console.WriteLine("Read data from IoT Hub {0} > temp: {1},  is heating on: {2}, # People: {3}", model.DeviceId + " " + model.Time.ToString("HH:mm:ss"), 
                        model.Internaltemp.ToString(), model.IsHeatingOn.ToString(), model.NumberofPeople.ToString());
 #endif
 

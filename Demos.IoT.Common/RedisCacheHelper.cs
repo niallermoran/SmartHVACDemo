@@ -9,7 +9,7 @@ using StackExchange.Redis;
 
 using Demos.IoT.Models;
 
-namespace Demos.IoT.Web
+namespace Demos.IoT
 {
     public class RedisCacheHelper
     {
