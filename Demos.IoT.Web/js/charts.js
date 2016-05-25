@@ -91,8 +91,7 @@
                         labelsAngle: 45
                     },
                     yaxis: {
-                        min: 10,
-                        max: 45
+                        min: 15,
                     },
                     grid: {
                         minorVerticalLines: true
@@ -184,7 +183,8 @@
                         labelsAngle: 45
                     },
                     yaxis: {
-                        min: 0
+                        min: 30,
+                        max:55
                     },
                     grid: {
                         minorVerticalLines: true
